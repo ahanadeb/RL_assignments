@@ -13,7 +13,7 @@ from utils.line_plot import *
 from utils.td0_eval import *
 from utils.lstd_eval import *
 from utils.soft_policy_iteration import *
-
+from tqdm import tqdm
 
 def problem_set03():
     F = pl_feature(X)
@@ -21,7 +21,7 @@ def problem_set03():
     eta_array = np.logspace(-2, +2, num=M)
     rewards = np.zeros((len(eta_array), 1))
     maxiter = 100
-    for i in range(0, len(eta_array)):
+    for i in tqdm(range(M)):
         rewards[i] = soft_policy_iter(F, maxiter, eta_array[i])
     x = np.arange(M)
     print(rewards)
@@ -34,4 +34,4 @@ def problem_set03():
     plt.axvline(x=opt_eta, color='r')
     plt.figtext(.6, .8, "optimal eta = "+ str(opt_eta))
     plt.show()
-    return 0
+    return plt
