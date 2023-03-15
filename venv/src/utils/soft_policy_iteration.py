@@ -11,6 +11,7 @@ from utils.policy_eval import *
 
 
 def soft_policy_iter(maxiter, eta):
+    print("hey")
     Q_est = np.zeros((X, A))
     policy = pi_uniform(X, A)
     new_policy = np.zeros((X, A))
