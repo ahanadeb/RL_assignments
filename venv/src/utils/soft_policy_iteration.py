@@ -10,8 +10,7 @@ import random
 from utils.policy_eval import *
 
 
-def soft_policy_iter(maxiter, eta):
-    print("hey")
+def soft_policy_iter(F, maxiter, eta):
     Q_est = np.zeros((X, A))
     policy = pi_uniform(X, A)
     new_policy = np.zeros((X, A))
@@ -19,8 +18,8 @@ def soft_policy_iter(maxiter, eta):
     total_reward = 0
     s0 = 99  # starting with a full queue
 
-    for i in range(0, maxiter):
-        V_k, s0, r_lstd = lstd(policy, F, s0, maxiter=e + 2)
+    for i in range(0, int(maxiter)):
+        V, s0, r_lstd = lstd(policy, F, s0, maxiter=int(1e+5))
         total_reward = total_reward + r_lstd
         for x in range(0, X):
             for a in range(0, A):
