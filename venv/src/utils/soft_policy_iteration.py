@@ -8,6 +8,7 @@ from utils.plot import *
 from utils.params import *
 import random
 from utils.policy_eval import *
+from tqdm import tqdm
 
 
 def soft_policy_iter(F, maxiter, eta):
@@ -18,7 +19,7 @@ def soft_policy_iter(F, maxiter, eta):
     total_reward = 0
     s0 = 99  # starting with a full queue
 
-    for i in range(0, int(maxiter)):
+    for i in tqdm(range(maxiter)):
         V, s0, r_lstd = lstd(policy, F, s0, maxiter=int(1e+5))
         total_reward = total_reward + r_lstd
         for x in range(0, X):
