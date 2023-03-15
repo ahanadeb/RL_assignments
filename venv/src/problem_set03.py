@@ -17,10 +17,10 @@ from tqdm import tqdm
 
 def problem_set03():
     F = pl_feature(X)
-    M = 10
+    M = 100
     eta_array = np.logspace(-2, +2, num=M)
     rewards = np.zeros((len(eta_array), 1))
-    maxiter = 3
+    maxiter = 100
     for i in tqdm(range(M)):
         rewards[i] = soft_policy_iter(F, maxiter, eta_array[i])
     x = np.arange(M)
@@ -32,6 +32,6 @@ def problem_set03():
     plt.ylabel('rewards gathered')
     plt.xlabel('eta values (log scale)')
     plt.axvline(x=opt_eta, color='r')
-    plt.figtext(.6, .8, "optimal eta = "+ str(opt_eta))
+    plt.figtext(.6, .8, "optimal eta = "+ "{:.3f}".format(opt_eta))
     plt.show()
     return plt
