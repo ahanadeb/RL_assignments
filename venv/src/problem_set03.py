@@ -17,7 +17,7 @@ from tqdm import tqdm
 
 def problem_set03():
     F = pl_feature(X)
-    M = 2
+    M = 100
     eta_array = np.logspace(-2, +2, num=M)
     rewards = np.zeros((len(eta_array), 1))
     maxiter = 100
