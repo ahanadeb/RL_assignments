@@ -23,6 +23,7 @@ def problem_set03():
     maxiter = 100
     for i in tqdm(range(M)):
         rewards[i] = soft_policy_iter(F, maxiter, eta_array[i])
+        print(rewards[i])
     x = np.arange(M)
     print(rewards)
     plt.semilogx(eta_array, rewards)
