@@ -40,5 +40,6 @@ def soft_policy_iter(F, maxiter, eta):
                 new_policy[x, a] = policy[x, a] * np.exp(eta * Q_est[x, a])
             new_policy[x, :] = new_policy[x, :] / np.sum(new_policy[x, :])
         policy = new_policy
+        print("Soft iter, ",i)
 
     return total_reward
