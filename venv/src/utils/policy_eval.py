@@ -57,7 +57,7 @@ def lstd(policy, F,s0, maxiter):
         a = np.argmax(policy[s, :])
         r = reward[s, a]
         next_s = random.choices(states, weights=P_pi[s, :].reshape((X,)), k=1)[0]
-        x = np.matmul((F[:, s].reshape((D,1))), np.transpose((F[:, s].reshape((D,1)) - gamma * F[:, next_s].reshape((D,1)))))
+        #x = np.matmul((F[:, s].reshape((D,1))), np.transpose((F[:, s].reshape((D,1)) - gamma * F[:, next_s].reshape((D,1)))))
         A_mat = A_mat + np.matmul((F[:, s].reshape((D,1))), np.transpose((F[:, s].reshape((D,1)) - gamma * F[:, next_s].reshape((D,1)))))
         b_mat = b_mat + r * F[:, s].reshape((b_mat.shape[0], 1))
         s = next_s

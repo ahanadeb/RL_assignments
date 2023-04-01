@@ -17,7 +17,7 @@ from tqdm import tqdm
 
 def problem_set03():
     F = pl_feature(X)
-    M = 100
+    M = 10
     eta_array = np.logspace(-2, +2, num=M)
     rewards = np.zeros((len(eta_array), 1))
     maxiter = 100
@@ -35,3 +35,14 @@ def problem_set03():
     plt.figtext(.6, .8, "optimal eta = "+ "{:.3f}".format(opt_eta))
     plt.show()
     return plt
+
+def check():
+    np.set_printoptions(threshold=np.inf)
+    F = pl_feature(X)
+    P = get_transitions(X, A, p, q_low, q_high)
+    pi=pi_aggressive(X, A)
+    s0=99
+    v,a,b=lstd(pi, F,s0, maxiter=10000)
+    plt.plot(v)
+    plt.show()
+    #print(F)
