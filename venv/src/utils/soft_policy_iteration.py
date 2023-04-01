@@ -32,8 +32,8 @@ def soft_policy_iter(F, maxiter, eta):
                 #     u = x
                 # else:
                 l = x - 1
-                if l<0:
-                    l=0
+                #if l<0:
+                #    l=0
                 u = x + 1
                 if u>X-1:
                     u=X-1
