@@ -50,14 +50,26 @@ def lstd(policy, F,s0, maxiter):
     theta = np.zeros((X, 1))
     P_pi = trans(P, policy)
     # loop for each episode here. Here episode = 1
-    s = s0  # initial state
+    s = 67  # initial state
     states = (np.arange(X)).reshape((X,))
     for i in range(maxiter):
         # get action at this state
         a = np.argmax(policy[s, :])
         r = reward[s, a]
+
         next_s = random.choices(states, weights=P_pi[s, :].reshape((X,)), k=1)[0]
-        #x = np.matmul((F[:, s].reshape((D,1))), np.transpose((F[:, s].reshape((D,1)) - gamma * F[:, next_s].reshape((D,1)))))
+
+        #choose action randomly
+        actions=np.array([0,1])
+        ac=random.choices(actions, weights=policy[s, :].reshape((A,)), k=1)[0]
+
+        prob=P[s,:,ac]
+
+        next_s = random.choices(states, weights=prob.reshape((X,)), k=1)[0]
+
+        r = reward[s, ac]
+
+
         A_mat = A_mat + np.matmul((F[:, s].reshape((D,1))), np.transpose((F[:, s].reshape((D,1)) - gamma * F[:, next_s].reshape((D,1)))))
         b_mat = b_mat + r * F[:, s].reshape((b_mat.shape[0], 1))
         s = next_s
