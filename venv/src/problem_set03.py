@@ -20,7 +20,7 @@ def problem_set03():
     M = 10
     eta_array = np.logspace(-2, +2, num=M)
     rewards = np.zeros((len(eta_array), 1))
-    maxiter = 100
+    maxiter = 10
     for i in tqdm(range(M)):
         rewards[i] = soft_policy_iter(F, maxiter, eta_array[i])
         print(rewards[i])

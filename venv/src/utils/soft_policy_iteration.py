@@ -20,19 +20,23 @@ def soft_policy_iter(F, maxiter, eta):
     s0 = 99  # starting with a full queue
 
     for i in range(0, maxiter):
-        V, s0, r_lstd = lstd(policy, F, s0, maxiter=int(1e+5))
+        V, s0, r_lstd = lstd(policy, F, s0, maxiter=int(1e+1))
         total_reward = total_reward + r_lstd
         for x in range(0, X):
             for a in range(0, A):
-                if x == 0:
-                    l = x
-                    u = x + 1
-                if x == X - 1:
-                    l = x - 1
-                    u = x
-                else:
-                    l = x - 1
-                    u = x + 1
+                # if x == 0:
+                #     l = x
+                #     u = x + 1
+                # if x == X - 1:
+                #     l = x - 1
+                #     u = x
+                # else:
+                l = x - 1
+                if l<0:
+                    l=0
+                u = x + 1
+                if u>X-1:
+                    u=X-1
                 Q_est[x, a] = r[x, a] + gamma * (1 - p) * (q[a] * V[l, 0] + (1 - q[a]) * V[x, 0]) \
                               + gamma * p * (q[a] * V[x, 0] + (1 - q[a]) * V[u, 0])
             Q_est[x, :] = Q_est[x, :] - np.max(Q_est[x, :])
