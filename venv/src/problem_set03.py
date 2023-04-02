@@ -20,10 +20,13 @@ def problem_set03():
     M = 10
     eta_array = np.logspace(-2, +2, num=M)
     rewards = np.zeros((len(eta_array), 1))
+    rewards2 = np.zeros((len(eta_array), 1))
     maxiter = 100
     for i in tqdm(range(M)):
        # rewards[i] = soft_policy_iter(F, maxiter, eta_array[i])
-        rewards[i] = soft_policy_iter(F, maxiter, eta_array)
+        a,b = soft_policy_iter(F, maxiter, eta_array)
+        rewards[i]= a
+        rewards2[i] = b
         print(rewards[i])
     x = np.arange(M)
     print(rewards)
@@ -41,13 +44,13 @@ def problem_set03():
 def check():
     F = pl_feature(X)
     M = 100
-    eta_array = np.logspace(-2, +0.55, num=M)
-    #eta_array = np.zeros((M,1))+80
+    #eta_array = np.logspace(-2, +0.55, num=M)
+    eta_array = np.zeros((M,1))+1
     rewards = np.zeros((len(eta_array), 1))
     maxiter = 100
 
     rewards1,rewards2 = soft_policy_iter(F, maxiter, eta_array)
-
+    print("total reward = ",rewards1)
     x = np.arange(M)
     print(rewards)
     plt.plot(x, rewards2)
