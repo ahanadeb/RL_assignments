@@ -22,7 +22,8 @@ def problem_set03():
     rewards = np.zeros((len(eta_array), 1))
     maxiter = 100
     for i in tqdm(range(M)):
-        rewards[i] = soft_policy_iter(F, maxiter, eta_array[i])
+       # rewards[i] = soft_policy_iter(F, maxiter, eta_array[i])
+        rewards[i] = soft_policy_iter(F, maxiter, eta_array)
         print(rewards[i])
     x = np.arange(M)
     print(rewards)
@@ -38,12 +39,23 @@ def problem_set03():
     return plt
 
 def check():
-    np.set_printoptions(threshold=np.inf)
     F = pl_feature(X)
-    P = get_transitions(X, A, p, q_low, q_high)
-    pi=pi_aggressive(X, A)
-    s0=99
-    v,a,b=lstd(pi, F,s0, maxiter=10000)
-    plt.plot(v)
+    M = 100
+    eta_array = np.logspace(-2, +2, num=M)
+    rewards = np.zeros((len(eta_array), 1))
+    maxiter = 100
+
+    rewards1,rewards2 = soft_policy_iter(F, maxiter, eta_array)
+
+    x = np.arange(M)
+    print(rewards)
+    plt.plot(x, rewards2)
+    max_reward = np.argmax(rewards)
+    opt_eta = eta_array[max_reward]
+
+    plt.ylabel('rewards gathered')
+    plt.xlabel('iterations')
+   # plt.axvline(x=opt_eta, color='r')
+   # plt.figtext(.6, .8, "optimal eta = " + "{:.3f}".format(opt_eta))
     plt.show()
-    #print(F)
+    return plt

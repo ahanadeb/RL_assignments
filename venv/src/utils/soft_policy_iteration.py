@@ -11,17 +11,19 @@ from utils.policy_eval import *
 from tqdm import tqdm
 
 
-def soft_policy_iter(F, maxiter, eta):
+def soft_policy_iter(F, maxiter, eta_array):
     Q_est = np.zeros((X, A))
     policy = pi_uniform(X, A)
     new_policy = np.zeros((X, A))
     r = get_reward(X, A)
     total_reward = 0
     s0 = 67  # starting with a full queue
-
+    lstd_arr =[]
     for i in range(0, maxiter):
+        eta = eta_array[int(i)]
         V, s0, r_lstd = lstd(policy, F, s0, maxiter=int(1e+5))
         total_reward = total_reward + r_lstd
+        lstd_arr.append(r_lstd)
         for x in range(0, X):
             for a in range(0, A):
                 # if x == 0:
@@ -46,4 +48,4 @@ def soft_policy_iter(F, maxiter, eta):
         policy = new_policy
         print("Soft iter, ",i)
 
-    return total_reward
+    return total_reward,lstd_arr

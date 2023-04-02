@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 if __name__ == '__main__':
     #problem_set01()
     #problem_set02()
-    problem_set03()
+    #problem_set03()
+    check()
 
 
