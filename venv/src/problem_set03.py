@@ -41,8 +41,8 @@ def problem_set03():
 def check():
     F = pl_feature(X)
     M = 100
-    #eta_array = np.logspace(-2, +2, num=M)
-    eta_array = np.zeros((M,1))+80
+    eta_array = np.logspace(-2, +2, num=M)
+    #eta_array = np.zeros((M,1))+80
     rewards = np.zeros((len(eta_array), 1))
     maxiter = 100
 
