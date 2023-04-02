@@ -21,7 +21,7 @@ def soft_policy_iter(F, maxiter, eta_array):
     lstd_arr =[]
     for i in range(0, maxiter):
         eta = eta_array[int(i)]
-        V, s0, r_lstd = lstd(policy, F, s0, maxiter=int(1e+1))
+        V, s0, r_lstd = lstd(policy, F, s0, maxiter=int(1e+5))
         total_reward = total_reward + r_lstd
         lstd_arr.append(r_lstd)
         for x in range(0, X):
