@@ -50,7 +50,7 @@ def lstd(policy, F,s0, maxiter):
     theta = np.zeros((X, 1))
     P_pi = trans(P, policy)
     # loop for each episode here. Here episode = 1
-    s = 67  # initial state
+    s = s0 # initial state
     states = (np.arange(X)).reshape((X,))
     for i in range(maxiter):
         # get action at this state

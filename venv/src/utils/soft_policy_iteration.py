@@ -17,7 +17,7 @@ def soft_policy_iter(F, maxiter, eta):
     new_policy = np.zeros((X, A))
     r = get_reward(X, A)
     total_reward = 0
-    s0 = 99  # starting with a full queue
+    s0 = 67  # starting with a full queue
 
     for i in range(0, maxiter):
         V, s0, r_lstd = lstd(policy, F, s0, maxiter=int(1e+5))
